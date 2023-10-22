@@ -5,7 +5,7 @@
 . Asciidoctorインストール
 . CodeRayインストール
 . VSCodeの拡張機能インストール
-. gitHub Pageインストール
+. gitHub Page作成
 
 === Chocolateyインストール
 公式サイト（https://chocolatey.org/install#installing-chocolatey）よりインストール用のコマンドを確認し、 +
@@ -36,7 +36,7 @@ gemコマンドを使用し、AdciidoctorとCodeRayをインストール。
 === VSCodeの拡張機能インストール
 VSCodeの拡張機能より、AsciiDocを検索、インストール。
 
-=== gitHub Pageインストール
+=== gitHub Page作成
 Github上でアカウント、リポジトリを作成する。 +
 その後ローカルにクローンを作成。docsフォルダを作成した後、masterブランチを作成する。
 [source,windows]
