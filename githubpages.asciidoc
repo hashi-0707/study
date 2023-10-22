@@ -1,0 +1,96 @@
+== GitHubpagesでの静的Webサイト構築（Windows10）
+=== 作業の流れ
+. Chocolateyインストール
+. Rubyインストール
+. Asciidoctorインストール
+. CodeRayインストール
+. VSCodeの拡張機能インストール
+. gitHub Pageインストール
+
+=== Chocolateyインストール
+公式サイト（https://chocolatey.org/install#installing-chocolatey）よりインストール用のコマンドを確認し、 +
+コマンドプロンプトで実行。
+[source,windows]
+----
+>choco -v 
+----
+
+=== Rubyインストール
+管理者権限でコマンドプロンプトを起動。ChocolateyでRubyをインストール。
+[source,windows]
+----
+>choco install ruby
+>ruby -v
+>gem -v
+----
+
+=== Asciidoctorインストール
+=== CodeRayインストール
+gemコマンドを使用し、AdciidoctorとCodeRayをインストール。
+[source,windows]
+----
+>gem install asciidoctor
+>gem install coderay
+----
+
+=== VSCodeの拡張機能インストール
+VSCodeの拡張機能より、AsciiDocを検索、インストール。
+
+=== gitHub Pageインストール
+Github上でアカウント、リポジトリを作成する。 +
+その後ローカルにクローンを作成。docsフォルダを作成した後、masterブランチを作成する。
+[source,windows]
+----
+>git clone https://github.com/hashi-0707/study
+>git branch master
+----
+*[red]#注意1#*
+[source,windows]
+----
+>git branch master
+----
+上記を実行した際、エラーが表示されmasterブランチの作成ができなかった。 +
+fatal: Not a valid object name: 'master'. +
+これは、一度もorignへpushをしたことの場合に発生するとのこと。 +
+解消のために、適当なファイルを作成しpushする。そうすると、masterブランチが勝手に作成される。
+[source,windows]
+----
+#適当なhtmlファイルをローカルリポジトリに保存。
+>git add -A .
+>git commit -m "first Commit"
+----
+*[red]#注意2#* +
+commitをする際に、エラーが表示された。 +
+Please tell me who you are. +
+エラーに表示されるgit congfig コマンドの実行し、再度コミットを行い、originへのpushを実行した。
+[source,windows]
+----
+>git config --global user.email "you@example.com"
+>git config --global user.name "Your Name"
+>git commit -m "Initial commit"
+>git push origin master
+----
+
+*[red]#注意3#*
+[source,windows]
+----
+>git push origin master
+----
+上記を実行した際、権限がないとのエラーが表示された。 +
+Permission denied +
+gitでは、パスワード認証が廃止され代替ログイン方法を設定する必要があるとのこと。 +
+適切な解消方法かは不明だが、sshキーを作成し、githubに登録することで解消した。
+[source,windows]
+----
+>ssh-keygen 
+#作成した公開鍵をgithub settingより登録
+>git push origin master
+#pushに成功!
+>git branch -a
+#masterブランチが作成されている！
+----
+
+=== 参考
+https://qiita.com/shiro01/items/fb93e91a8424e1c4a556#:~:text=%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%82%AD%E3%83%BC%20Ctrl%20%2B%2C%20%E3%81%A7%E8%A8%AD%E5%AE%9A%E7%94%BB%E9%9D%A2%E3%82%92%E9%96%8B%E3%81%8D%E3%80%81%20%E8%A8%AD%E5%AE%9A%E3%81%AE%E6%A4%9C%E7%B4%A2%E3%81%A7%E3%80%8Casciidoc%E3%80%8D%E3%82%92%E5%85%A5%E5%8A%9B%E3%81%97%E3%81%A6%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%81%9F%E8%A8%AD%E5%AE%9A%E7%94%BB%E9%9D%A2%E3%81%8B%E3%82%89%E3%80%81%E4%BB%A5%E4%B8%8B%E3%81%AE%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%82%92%E5%A4%96%E3%81%97%E3%81%A6%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B%E3%80%82%20Ascii%20Doc%3A%20Use_asciidoctor_js,%E2%96%A1%20Use%20asciidoctor%20js%20instead%20of%20the%20%27html_generator%27[Windows10にAsciiDoc(Asciidoctor)を導入。]
+
+
