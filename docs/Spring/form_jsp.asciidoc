@@ -1,0 +1,71 @@
+== JSPでの入力項目とjavaのクラスへのバインド方法
+
+=== formクラスの準備
+バインドしたいformクラスを作成する。 +
+TodoFormクラスを用意した場合の例は以下。 +
+この例では、todoId,todoTitleという2つフィールド宣言、それぞれに@validで端項目チェックを実施している。 +
+本formでは、一つのフォームで2つバインド対象が存在する。それぞれでクラスを用意してもよいが、管理のコストがかかるので、例のようにpublic static interface TodoCreate、public static interface TodoFinishを宣言し、２つのグループを作成。 +
+@validでgroupsを指定することでチェックを適用する対象を分けられる。
+
+
+[source,java]
+----
+import java.io.Serializable;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+public class TodoForm implements Serializable {
+	public static interface TodoCreate{
+	};
+	
+	public static interface TodoFinish{
+	};
+	
+	private static final long serialVersionUID = 1L;
+	
+	@NotNull(groups = { TodoFinish.class })
+	private String todoId;
+	
+	@NotNull(groups = { TodoCreate.class})
+	@Size(min = 1, max = 30, groups = { TodoCreate.class })
+	private String todoTitle;
+	
+	public String getTodoId() {
+		return todoId;
+	}
+	
+	public void setTodoId(String todoId) {
+		this.todoId = todoId;
+	}
+	
+	public String getTodoTitle() {
+		return todoTitle;
+	}
+	
+	public void setTodoTitle(String todoTitle) {
+		this.todoTitle = todoTitle;
+	}
+
+}
+----
+
+=== JSPでの記載
+以下のようなformタグを用意することでバインドできる。
+
+[souece,java]
+----
+<form:form>
+//formの送信先のパスを指定。
+　　action="${pageContext.request.contextPath}/todo/create"
+　　method="post"
+//bind対象のformクラスを指定。先頭が小文字になる。（TodoForm→todoForm）
+　　modelAttribute="todoForm">
+//bind対象のクラスのフィールドをpath="~"で指定する。
+    <form:input path="todoTitle" />
+//以下のように記載することで、@Validでエラーが出た時にエラーメッセージを表示してくれる。
+	<form:errors path="todoTitle" cssClass="text-error" />
+//ボタンを用意してくれるタグ。他にもhidden,checkboxesなど色々ある。
+	<form:button>Create Todo</form:button>
+</form:form>
+----
