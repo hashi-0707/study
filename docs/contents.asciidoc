@@ -1,0 +1,11 @@
+== 目次
+=== Java
+* https://hashi-0707.github.io/study/java/Generics[Genericsについて]
+* https://hashi-0707.github.io/study/java/Serializable[シリアライズとデシリアライズ]
+
+=== Spring
+⋆ https://hashi-0707.github.io/study/Spring/form_jsp[画面入力のバインド]
+
+=== その他
+* https://hashi-0707.github.io/study/charcode[文字コードについて]
+* https://hashi-0707.github.io/study/githubpages[GithubPagesでの作業メモ作成]
