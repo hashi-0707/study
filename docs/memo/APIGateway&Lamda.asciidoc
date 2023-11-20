@@ -1,0 +1,46 @@
+== API GatewayとLambdaを使ったサーバレスSpringアプリケーション(1)
+
+=== Jarファイルの作成
+作業を進めるにあたり、jarファイルを作成する。 +
+今回は時間短縮ため、提供されているアプリケーションをGitHUbからダウンロードした。 +
+Intellijでフォルダを開き、mavenでビルドを行う。
+画面左部にあるmavenをクリックし、Lifecycle配下のpackageを選択すると、targetフォルダにjarファイルが作成される。
+
+image::../images/mavenbuild.JPG[]
+
+== API GatewayとLambdaを使ったサーバレスSpringアプリケーション(2)
+
+=== Lamda関数の作成
+* 関数の作成 +
+キャプチャの通り、関数名「mynavi」、ランタイム「java8 on Amazon Linux1」、アーキテクチャ「x86_64」、ロール「新しいロールの作成」で進める。
+
+image::../images/makefunction.JPG[]
+
+image::../images/makefunction2.JPG[]
+
+関数の作成を選択し、Lamda関数を作成することが出来た。
+
+image::../images/Lamda.JPG[]
+
+* コードソース +
+アップロード元にjarファイルを選択し、↑で作成したjarファイルをアップロードする。
+
+image::../images/codesource1.JPG[]
+
+image::../images/codesource2.JPG[]
+
+* ハンドラ +
+Lamdaのエントリポイントとなるハンドラメソッドを記載する。作成したjarの中のハンドラメソッドのFQCNを記載する。
+
+image::../images/handler1.JPG[]
+
+image::../images/handler2.JPG[]
+
+* 環境変数 +
+Spring Cloud Functionでは、実行する関数を環境変数FUNCTION_NAMEで指定したBean名で取得するとのこと。 +
+理解出来ていない部分もあるが、FunctionクラスのBean名を指定する。
+
+image::../images/envvari.JPG[]
+
+
+
