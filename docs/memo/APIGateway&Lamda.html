@@ -544,11 +544,14 @@ Spring Cloud Functionでは、実行する関数を環境変数FUNCTION_NAMEで�
 </div>
 </div>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 </div>
 <div id="footer">
 <div id="footer-text">
 Last updated 2023-11-21 02:23:50 +0900
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sect1">
 <h2 id="_api_gatewayとlambdaを使ったサーバレスspringアプリケーション3">API GatewayとLambdaを使ったサーバレスSpringアプリケーション(3)</h2>
 <div class="sectionbody">
@@ -600,8 +603,56 @@ Lamdaにリクエストを投げるために、「Lambdaプロキシ統合」に
 Webから、java8をインストール。環境変数「JAVA_HOME」にインストールしてきたJavaのパスを指定し、再度ビルドを行いLambdaに
 アップロードしなおしたところ、正常にテストができるようになった。</p>
 </div>
+<<<<<<< Updated upstream
 <div class="paragraph">
 <p>mvn package</p>
+=======
+<div class="listingblock">
+<div class="content">
+<pre>&gt;mvn package</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_apiの公開">APIの公開</h3>
+<div class="paragraph">
+<p>APIがWebからアクセスできるようにインターネット上に公開していく。<br>
+「APIをデプロイ」を選択すると、APIにアクセスするためのエンドポイント（URL）を発行してくれる。<br>
+「New Stage」を選択肢、ステージ名を「dev」とする。<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/APIGateway7.JPG" alt="APIGateway7">
+</div>
+</div>
+<div class="paragraph">
+<p>APIにアクセスするためのURLが発行された。ステージとデプロイについては、下記のサイトが参考になった。<br>
+<a href="https://dev.classmethod.jp/articles/getting-start-api-gateway/">ゼロから作りながら覚えるAPI Gateway環境構築</a></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/APIGateway8.JPG" alt="APIGateway8">
+</div>
+</div>
+<div class="paragraph">
+<p>次にcurlコマンドで実際にアクセスできるか試していく。<br>
+下記のコマンドを実行したところ、Unexpected character ('T' (code 84)): was expecting double-quote to start field nameとのエラーがでてしまった。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-CMD" data-lang="CMD">&gt;curl -d {"TEST":"aaa"} https://4z9dtjvjw8.execute-api.ap-northeast-1.amazonaws.com/dev/Sample</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>詳細不明だがwindowsの処理仕様の問題で、上手く行かないことがあるとのこと。<br>
+ダブルクォーテーションをエスケープすると正常にリクエストが通った。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-CMD" data-lang="CMD">&gt;curl -d "{\"TEST\":\"aaa\"}" https://4z9dtjvjw8.execute-api.ap-northeast-1.amazonaws.com/dev/Sample
+"Complete!"</code></pre>
+</div>
+>>>>>>> Stashed changes
 </div>
 </div>
 </div>
@@ -609,7 +660,11 @@ Webから、java8をインストール。環境変数「JAVA_HOME」にインス
 </div>
 <div id="footer">
 <div id="footer-text">
+<<<<<<< Updated upstream
 Last updated 2023-11-27 14:07:28 +0900
+>>>>>>> Stashed changes
+=======
+Last updated 2023-11-27 15:12:54 +0900
 >>>>>>> Stashed changes
 </div>
 </div>
