@@ -543,10 +543,74 @@ Spring Cloud Functionでは、実行する関数を環境変数FUNCTION_NAMEで�
 </div>
 </div>
 </div>
+<<<<<<< Updated upstream
 </div>
 <div id="footer">
 <div id="footer-text">
 Last updated 2023-11-21 02:23:50 +0900
+=======
+<div class="sect1">
+<h2 id="_api_gatewayとlambdaを使ったサーバレスspringアプリケーション3">API GatewayとLambdaを使ったサーバレスSpringアプリケーション(3)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_amazon_api_gatewayの設定">Amazon API Gatewayの設定</h3>
+<div class="paragraph">
+<p>APIGatewayを開き、構築、新しいAPIから上で作成したLambdaにリクエストを送るためのAPIGatewayの設定を行う。<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/APIGateway1.JPG" alt="APIGateway1">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/APIGateway2.JPG" alt="APIGateway2">
+</div>
+</div>
+<div class="paragraph">
+<p>構築ができた。続けて、/Sampleでリクエストを受け付けられるようにリソースの作成を行う。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/APIGateway3.JPG" alt="APIGateway3">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/APIGateway4.JPG" alt="APIGateway4">
+</div>
+</div>
+<div class="paragraph">
+<p>続けて、メソッドの設定を行う。今回利用するのは、POSTメソッドのため。メソッドタイプに「POST」を設定。<br>
+Lamdaにリクエストを投げるために、「Lambdaプロキシ統合」にチェックをいれ、上で作成しらLambdaを指定する。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/APIGateway5.JPG" alt="APIGateway5">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/APIGateway6.JPG" alt="APIGateway6">
+</div>
+</div>
+<div class="paragraph">
+<p>この状態で、テストを行ったがClassNotFoundErrorが発生し、正常にリクエストを投げることができなかった。<br>
+原因としては、PCに入っているjavaとGitHubからインストールしてきたjavaのバージョンがことなっていたため、正常にビルドができていなかったことのよう。<br>
+Webから、java8をインストール。環境変数「JAVA_HOME」にインストールしてきたJavaのパスを指定し、再度ビルドを行いLambdaに
+アップロードしなおしたところ、正常にテストができるようになった。</p>
+</div>
+<div class="paragraph">
+<p>mvn package</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-11-27 14:07:28 +0900
+>>>>>>> Stashed changes
 </div>
 </div>
 </body>
