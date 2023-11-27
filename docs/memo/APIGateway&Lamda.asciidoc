@@ -70,5 +70,39 @@ image::../images/APIGateway6.JPG[]
 Webから、java8をインストール。環境変数「JAVA_HOME」にインストールしてきたJavaのパスを指定し、再度ビルドを行いLambdaに
 アップロードしなおしたところ、正常にテストができるようになった。
 
-[surce]
-mvn package
+[surce,CMD]
+----
+>mvn package
+----
+
+=== APIの公開
+APIがWebからアクセスできるようにインターネット上に公開していく。 +
+「APIをデプロイ」を選択すると、APIにアクセスするためのエンドポイント（URL）を発行してくれる。 +
+「New Stage」を選択肢、ステージ名を「dev」とする。 +
+
+image::../images/APIGateway7.JPG[]
+
+APIにアクセスするためのURLが発行された。ステージとデプロイについては、下記のサイトが参考になった。 +
+https://dev.classmethod.jp/articles/getting-start-api-gateway/[ゼロから作りながら覚えるAPI Gateway環境構築]
+
+image::../images/APIGateway8.JPG[]
+
+次にcurlコマンドで実際にアクセスできるか試していく。 +
+下記のコマンドを実行したところ、Unexpected character ('T' (code 84)): was expecting double-quote to start field nameとのエラーがでてしまった。
+
+[source,CMD]
+----
+>curl -d {"TEST":"aaa"} https://4z9dtjvjw8.execute-api.ap-northeast-1.amazonaws.com/dev/Sample
+----
+
+詳細不明だがwindowsの処理仕様の問題で、上手く行かないことがあるとのこと。 +
+ダブルクォーテーションをエスケープすると正常にリクエストが通った。
+
+[source,CMD]
+----
+>curl -d "{\"TEST\":\"aaa\"}" https://4z9dtjvjw8.execute-api.ap-northeast-1.amazonaws.com/dev/Sample
+"Complete!"
+----
+
+
+
